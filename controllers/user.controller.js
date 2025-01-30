@@ -1,5 +1,5 @@
 import userModel from '../models/user.model.js';
-import userService from "../services/user.service.js";
+import {createUser} from "../services/user.service.js";
 import { validationResult } from 'express-validator';
 
 export const createUserController = async (req,res) => {
@@ -10,7 +10,7 @@ export const createUserController = async (req,res) => {
     }
 
     try {
-        const user = await userService.createUser(req.body);
+        const user = await createUser(req.body);
         const token = await user.generateJWT()
 
         res.status(201).send({user,token})
