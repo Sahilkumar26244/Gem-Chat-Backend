@@ -50,6 +50,8 @@ export const loginController = async (req, res) => {
       });
     }
 
+    delete user._doc.password;
+
     const token = await user.generateJWT();
 
     res.status(200).json({ user, token });
